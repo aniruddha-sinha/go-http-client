@@ -13,7 +13,7 @@ var (
 )
 
 type ClientAPI interface {
-	Do(ctx context.Context, url, method string, headers map[string]string, payload any) (*http.Response, error)
+	Do(ctx context.Context, url, method string, headers map[string]string, payload io.Reader) (*http.Response, error)
 }
 
 type Client struct {
@@ -61,7 +61,7 @@ func statusCodeAnalyzer(res *http.Response) (*http.Response, error) {
 	return res, nil
 }
 
-func (c *Client) Do(ctx context.Context, method, url string, headers map[string]string, body io.Reader) (*http.Response, error) {
+func (c *Client) Do(ctx context.Context, url, method string, headers map[string]string, body io.Reader) (*http.Response, error) {
 	req, err := c.requestBuilder(ctx, method, url, headers, body)
 	if err != nil {
 		return nil, err
