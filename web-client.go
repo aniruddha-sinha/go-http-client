@@ -62,7 +62,7 @@ func statusCodeAnalyzer(res *http.Response) (*http.Response, error) {
 }
 
 func (c *Client) Do(ctx context.Context, url, method string, headers map[string]string, body io.Reader) (*http.Response, error) {
-	req, err := c.requestBuilder(ctx, method, url, headers, body)
+	req, err := c.requestBuilder(ctx, url, method, headers, body)
 	if err != nil {
 		return nil, err
 	}
